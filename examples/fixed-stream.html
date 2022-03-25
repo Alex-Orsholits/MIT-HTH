@@ -222,10 +222,9 @@
       function onConnect() {
         console.log("onConnect", new Date());
 
-        NAF.connection.adapter.enableMicrophone(true);
         // Handle camera button click (Off and On)
         cameraBtnEle.addEventListener("click", function () {
-          //   NAF.connection.adapter.enableMicrophone(!cameraEnabled);
+          NAF.connection.adapter.enableMicrophone(!cameraEnabled);
           NAF.connection.adapter.enableCamera(!cameraEnabled);
           cameraEnabled = !cameraEnabled;
           cameraBtnEle.textContent = cameraEnabled
