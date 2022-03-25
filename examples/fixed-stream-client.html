@@ -10,9 +10,127 @@
     <script src="/dist/networked-aframe.js"></script>
 
     <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
-    <!--<script src="https://unpkg.com/aframe-particle-system-component@1.0.5/dist/aframe-particle-system-component.min.js"></script>-->
+
+    <!-- <script>
+      // Note the way we're establishing the NAF schema here; this is a bit awkward
+      // because of a recent bug found in the original handling. This mitigates that bug for now,
+      // until a refactor in the future that should fix the issue more cleanly.
+      NAF.schemas.getComponentsOriginal = NAF.schemas.getComponents;
+
+      // This one is necessary, because tracking the .head child component's material's color
+      // won't happen unless we tell NAF to keep it in sync, like here.
+      NAF.schemas.getComponents = (template) => {
+        if (!NAF.schemas.hasTemplate("#head-template")) {
+          NAF.schemas.add({
+            template: "#head-template",
+            components: [
+              "position",
+              "rotation",
+
+              // NOTICE THAT WE SYNC PLAYER INFO! this is where color and username are stored
+              "player-info",
+            ],
+          });
+        }
+
+        const components = NAF.schemas.getComponentsOriginal(template);
+        return components;
+      };
+    </script> -->
+
     <script src="https://cdn.jsdelivr.net/gh/IdeaSpaceVR/aframe-particle-system-component@master/dist/aframe-particle-system-component.min.js"></script>
     <script src="/js/spawn-in-circle.component.js"></script>
+
+    <script>
+      AFRAME.registerComponent("tracked-vr-hands", {
+        onEnterVR() {
+          if (AFRAME.utils.device.isMobile()) return; // exclude e.g. cardboard, which lacks tracked controllers
+          if (document.getElementById("my-tracked-right-hand")) return; // don't add them in more than once!
+          // add these with JS:
+          // <a-entity hand-controls="hand:left" networked="template:#left-hand-template;attachTemplateToLocal:true;"></a-entity>
+          // <a-entity hand-controls="hand:right" networked="template:#right-hand-template;attachTemplateToLocal:true;"></a-entity>
+          ["left", "right"].forEach((side) => {
+            const el = document.createElement("a-entity");
+            el.setAttribute("hand-controls", { hand: side });
+            el.setAttribute("networked", {
+              template: `#${side}-hand-template`,
+              attachTemplateToLocal: false,
+            });
+            el.setAttribute("id", `my-tracked-${side}-hand`);
+            // note that the ID will be applied to THIS client's hands,
+            // but not other connected clients,
+            // and not on the machine of other connected clients
+            this.el.appendChild(el);
+          });
+        },
+        init() {
+          this.el.sceneEl.addEventListener(
+            "enter-vr",
+            this.onEnterVR.bind(this)
+          );
+          // future improvements:
+          // pick up hand-controls events
+          // https://github.com/aframevr/aframe/blob/b164623dfa0d2548158f4b7da06157497cd4ea29/docs/components/hand-controls.md
+          // and broadcast the matching gestures to other connected clients
+          // possibly trigger the animation on the model itself using animation-mixer:
+          // https://github.com/n5ro/aframe-extras/tree/master/src/loaders
+          // could add as 'networked-hands' component within repo
+        },
+      });
+      // Camera status
+      //   let cameraEnabled = true;
+      //   // Camera button element
+      //   const cameraBtnEle = document.getElementById("camera-btn");
+
+      //   // Screen share status
+      //   let screenEnabled = false;
+      //   // Screen share button element
+      //   const screenBtnEle = document.getElementById("screen-btn");
+
+      // On mobile remove elements that are resource heavy
+      const isMobile = AFRAME.utils.device.isMobile();
+
+      if (isMobile) {
+        const particles = document.getElementById("particles");
+        particles.parentNode.removeChild(particles);
+      }
+
+      // Define custom schema for syncing avatar color, set by random-color
+      NAF.schemas.add({
+        template: "#player-template",
+        components: ["position", "rotation"],
+      });
+
+      // Called by Networked-Aframe when connected to server
+      function onConnect() {
+        console.log("onConnect", new Date());
+
+        // Handle camera button click (Off and On)
+        // cameraBtnEle.addEventListener("click", function () {
+        //   NAF.connection.adapter.enableCamera(!cameraEnabled);
+        //   cameraEnabled = !cameraEnabled;
+        //   cameraBtnEle.textContent = cameraEnabled
+        //     ? "Hide Camera"
+        //     : "Show Camera";
+        // });
+
+        // Handle screen button click (Off and On)
+        // screenBtnEle.addEventListener("click", function () {
+        //   if (screenEnabled) {
+        //     NAF.connection.adapter.removeLocalMediaStream("screen");
+        //     screenEnabled = false;
+        //     screenBtnEle.textContent = "Share screen";
+        //   } else {
+        //     navigator.mediaDevices.getDisplayMedia().then((stream) => {
+        //       NAF.connection.adapter.addLocalMediaStream(stream, "screen");
+        //       screenEnabled = true;
+        //       screenBtnEle.textContent = "Stop Screen";
+        //     });
+        //   }
+        // });
+      }
+    </script>
+
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
   </head>
   <body>
@@ -114,6 +232,7 @@
           networked="template:#player-template;"
           camera
           position="0 1.6 0"
+          wasd-controls
           look-controls
           visible="false"
         >
@@ -146,95 +265,6 @@
       <button id="screen-btn" type="button" class="button">Share screen</button>
     </div> -->
 
-    <script>
-      AFRAME.registerComponent("tracked-vr-hands", {
-        onEnterVR() {
-          if (AFRAME.utils.device.isMobile()) return; // exclude e.g. cardboard, which lacks tracked controllers
-          if (document.getElementById("my-tracked-right-hand")) return; // don't add them in more than once!
-          // add these with JS:
-          // <a-entity hand-controls="hand:left" networked="template:#left-hand-template;attachTemplateToLocal:true;"></a-entity>
-          // <a-entity hand-controls="hand:right" networked="template:#right-hand-template;attachTemplateToLocal:true;"></a-entity>
-          ["left", "right"].forEach((side) => {
-            const el = document.createElement("a-entity");
-            el.setAttribute("hand-controls", { hand: side });
-            el.setAttribute("networked", {
-              template: `#${side}-hand-template`,
-              attachTemplateToLocal: false,
-            });
-            el.setAttribute("id", `my-tracked-${side}-hand`);
-            // note that the ID will be applied to THIS client's hands,
-            // but not other connected clients,
-            // and not on the machine of other connected clients
-            this.el.appendChild(el);
-          });
-        },
-        init() {
-          this.el.sceneEl.addEventListener(
-            "enter-vr",
-            this.onEnterVR.bind(this)
-          );
-          // future improvements:
-          // pick up hand-controls events
-          // https://github.com/aframevr/aframe/blob/b164623dfa0d2548158f4b7da06157497cd4ea29/docs/components/hand-controls.md
-          // and broadcast the matching gestures to other connected clients
-          // possibly trigger the animation on the model itself using animation-mixer:
-          // https://github.com/n5ro/aframe-extras/tree/master/src/loaders
-          // could add as 'networked-hands' component within repo
-        },
-      });
-      // Camera status
-      //   let cameraEnabled = true;
-      //   // Camera button element
-      //   const cameraBtnEle = document.getElementById("camera-btn");
-
-      //   // Screen share status
-      //   let screenEnabled = false;
-      //   // Screen share button element
-      //   const screenBtnEle = document.getElementById("screen-btn");
-
-      // On mobile remove elements that are resource heavy
-      const isMobile = AFRAME.utils.device.isMobile();
-
-      if (isMobile) {
-        const particles = document.getElementById("particles");
-        particles.parentNode.removeChild(particles);
-      }
-
-      // Define custom schema for syncing avatar color, set by random-color
-      NAF.schemas.add({
-        template: "#player-template",
-        components: ["position", "rotation"],
-      });
-
-      // Called by Networked-Aframe when connected to server
-      function onConnect() {
-        console.log("onConnect", new Date());
-
-        // Handle camera button click (Off and On)
-        // cameraBtnEle.addEventListener("click", function () {
-        //   NAF.connection.adapter.enableCamera(!cameraEnabled);
-        //   cameraEnabled = !cameraEnabled;
-        //   cameraBtnEle.textContent = cameraEnabled
-        //     ? "Hide Camera"
-        //     : "Show Camera";
-        // });
-
-        // Handle screen button click (Off and On)
-        // screenBtnEle.addEventListener("click", function () {
-        //   if (screenEnabled) {
-        //     NAF.connection.adapter.removeLocalMediaStream("screen");
-        //     screenEnabled = false;
-        //     screenBtnEle.textContent = "Share screen";
-        //   } else {
-        //     navigator.mediaDevices.getDisplayMedia().then((stream) => {
-        //       NAF.connection.adapter.addLocalMediaStream(stream, "screen");
-        //       screenEnabled = true;
-        //       screenBtnEle.textContent = "Stop Screen";
-        //     });
-        //   }
-        // });
-      }
-    </script>
     <!--
       Known issues with this demo, some cases are not handled:
       - If participant A shares their screen, the partipant B sees the other participant's screen.
