@@ -101,21 +101,21 @@
       <a-entity id="particles" particle-system="preset: snow"></a-entity>
     </a-scene>
 
-    <div class="actions">
+    <!-- <div class="actions">
       <button id="camera-btn" type="button" class="button">Hide Camera</button>
       <button id="screen-btn" type="button" class="button">Share screen</button>
-    </div>
+    </div> -->
 
     <script>
       // Camera status
-      let cameraEnabled = true;
-      // Camera button element
-      const cameraBtnEle = document.getElementById("camera-btn");
+      //   let cameraEnabled = true;
+      //   // Camera button element
+      //   const cameraBtnEle = document.getElementById("camera-btn");
 
-      // Screen share status
-      let screenEnabled = false;
-      // Screen share button element
-      const screenBtnEle = document.getElementById("screen-btn");
+      //   // Screen share status
+      //   let screenEnabled = false;
+      //   // Screen share button element
+      //   const screenBtnEle = document.getElementById("screen-btn");
 
       // On mobile remove elements that are resource heavy
       const isMobile = AFRAME.utils.device.isMobile();
@@ -136,28 +136,28 @@
         console.log("onConnect", new Date());
 
         // Handle camera button click (Off and On)
-        cameraBtnEle.addEventListener("click", function () {
-          NAF.connection.adapter.enableCamera(!cameraEnabled);
-          cameraEnabled = !cameraEnabled;
-          cameraBtnEle.textContent = cameraEnabled
-            ? "Hide Camera"
-            : "Show Camera";
-        });
+        // cameraBtnEle.addEventListener("click", function () {
+        //   NAF.connection.adapter.enableCamera(!cameraEnabled);
+        //   cameraEnabled = !cameraEnabled;
+        //   cameraBtnEle.textContent = cameraEnabled
+        //     ? "Hide Camera"
+        //     : "Show Camera";
+        // });
 
         // Handle screen button click (Off and On)
-        screenBtnEle.addEventListener("click", function () {
-          if (screenEnabled) {
-            NAF.connection.adapter.removeLocalMediaStream("screen");
-            screenEnabled = false;
-            screenBtnEle.textContent = "Share screen";
-          } else {
-            navigator.mediaDevices.getDisplayMedia().then((stream) => {
-              NAF.connection.adapter.addLocalMediaStream(stream, "screen");
-              screenEnabled = true;
-              screenBtnEle.textContent = "Stop Screen";
-            });
-          }
-        });
+        // screenBtnEle.addEventListener("click", function () {
+        //   if (screenEnabled) {
+        //     NAF.connection.adapter.removeLocalMediaStream("screen");
+        //     screenEnabled = false;
+        //     screenBtnEle.textContent = "Share screen";
+        //   } else {
+        //     navigator.mediaDevices.getDisplayMedia().then((stream) => {
+        //       NAF.connection.adapter.addLocalMediaStream(stream, "screen");
+        //       screenEnabled = true;
+        //       screenBtnEle.textContent = "Stop Screen";
+        //     });
+        //   }
+        // });
       }
     </script>
     <!--
