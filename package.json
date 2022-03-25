@@ -1,0 +1,12 @@
+{
+  "name": "mit-hth",
+  "version": "0.1.0",
+  "description": "The Mirror",
+  "scripts": {
+    "start": "node ./server/easyrtc-server.js"
+  },
+  "author": "MIT Reality Hack Members",
+  "dependencies": {
+    "networked-aframe": "^0.9.0"
+  }
+}
