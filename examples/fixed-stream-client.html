@@ -111,12 +111,12 @@
       >
         <a-entity
           id="player"
-          networked="template:#player-template;attachTemplateToLocal:false;"
+          networked="template:#player-template;"
           camera
           position="0 1.6 0"
-          spawn-in-circle="radius:3"
           wasd-controls
           look-controls
+          visible="false"
         >
           <a-sphere class="head" visible="false" random-color></a-sphere>
         </a-entity>
