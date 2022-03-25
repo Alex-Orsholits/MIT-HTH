@@ -66,19 +66,60 @@
           </a-entity>
         </template>
 
+        <template id="left-hand-template">
+          <a-entity>
+            <a-gltf-model
+              class="tracked-left-hand"
+              rotation="0 0 90"
+              src="#left-hand-model"
+            ></a-gltf-model>
+          </a-entity>
+        </template>
+
+        <template id="right-hand-template">
+          <a-entity>
+            <a-gltf-model
+              class="tracked-right-hand"
+              rotation="0 0 -90"
+              src="#right-hand-model"
+            ></a-gltf-model>
+          </a-entity>
+        </template>
+
+        <a-asset-item
+          id="left-hand-model"
+          src="./assets/leftHandHigh.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="right-hand-model"
+          src="./assets/rightHandHigh.glb"
+        ></a-asset-item>
+
+        <template id="camera-rig-template">
+          <a-entity></a-entity>
+        </template>
+
         <!-- /Templates -->
       </a-assets>
 
       <a-entity
-        id="player"
-        networked="template:#player-template;attachTemplateToLocal:false;"
-        camera
-        position="0 1.6 0"
+        id="camera-rig"
+        tracked-vr-hands
+        movement-controls="fly:true;"
         spawn-in-circle="radius:3"
-        wasd-controls
-        look-controls
+        networked="template:#camera-rig-template;"
       >
-        <a-sphere class="head" visible="false" random-color></a-sphere>
+        <a-entity
+          id="player"
+          networked="template:#player-template;attachTemplateToLocal:false;"
+          camera
+          position="0 1.6 0"
+          spawn-in-circle="radius:3"
+          wasd-controls
+          look-controls
+        >
+          <a-sphere class="head" visible="false" random-color></a-sphere>
+        </a-entity>
       </a-entity>
 
       <a-entity
@@ -107,6 +148,41 @@
     </div> -->
 
     <script>
+      AFRAME.registerComponent("tracked-vr-hands", {
+        onEnterVR() {
+          if (AFRAME.utils.device.isMobile()) return; // exclude e.g. cardboard, which lacks tracked controllers
+          if (document.getElementById("my-tracked-right-hand")) return; // don't add them in more than once!
+          // add these with JS:
+          // <a-entity hand-controls="hand:left" networked="template:#left-hand-template;attachTemplateToLocal:true;"></a-entity>
+          // <a-entity hand-controls="hand:right" networked="template:#right-hand-template;attachTemplateToLocal:true;"></a-entity>
+          ["left", "right"].forEach((side) => {
+            const el = document.createElement("a-entity");
+            el.setAttribute("hand-controls", { hand: side });
+            el.setAttribute("networked", {
+              template: `#${side}-hand-template`,
+              attachTemplateToLocal: false,
+            });
+            el.setAttribute("id", `my-tracked-${side}-hand`);
+            // note that the ID will be applied to THIS client's hands,
+            // but not other connected clients,
+            // and not on the machine of other connected clients
+            this.el.appendChild(el);
+          });
+        },
+        init() {
+          this.el.sceneEl.addEventListener(
+            "enter-vr",
+            this.onEnterVR.bind(this)
+          );
+          // future improvements:
+          // pick up hand-controls events
+          // https://github.com/aframevr/aframe/blob/b164623dfa0d2548158f4b7da06157497cd4ea29/docs/components/hand-controls.md
+          // and broadcast the matching gestures to other connected clients
+          // possibly trigger the animation on the model itself using animation-mixer:
+          // https://github.com/n5ro/aframe-extras/tree/master/src/loaders
+          // could add as 'networked-hands' component within repo
+        },
+      });
       // Camera status
       //   let cameraEnabled = true;
       //   // Camera button element
