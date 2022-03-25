@@ -61,22 +61,8 @@
         </template>
 
         <template id="player-template">
-          <a-entity class="avatar">
-            <a-plane
-              color="#FFF"
-              width="16"
-              height="9"
-              position="0 3 0"
-              material="side: back"
-              networked-video-source
-            ></a-plane>
-            <a-plane
-              color="#000"
-              width="16"
-              height="9"
-              position="0 3 -0.1"
-              material="side: both"
-            ></a-plane>
+          <a-entity class="nonstreaming">
+            <a-sphere class="head" visible="true" random-color></a-sphere>
           </a-entity>
         </template>
 
@@ -85,13 +71,14 @@
 
       <a-entity
         id="player"
+        networked="template:#avatar-template;attachTemplateToLocal:false;"
         camera
         position="0 1.6 0"
         spawn-in-circle="radius:3"
         wasd-controls
         look-controls
       >
-        <a-sphere class="head" visible="true" random-color></a-sphere>
+        <a-sphere class="head" visible="false" random-color></a-sphere>
       </a-entity>
 
       <a-entity
@@ -140,7 +127,7 @@
 
       // Define custom schema for syncing avatar color, set by random-color
       NAF.schemas.add({
-        template: "#avatar-template",
+        template: "#player-template",
         components: ["position", "rotation"],
       });
 
