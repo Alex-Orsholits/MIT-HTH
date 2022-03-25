@@ -98,7 +98,7 @@
       room: basic-multi-stream;
       debug: true;
       adapter: easyrtc;
-      audio: false;
+      audio: true;
       video: false;
     "
     >
@@ -145,6 +145,7 @@
               visible="true"
               radius="0.5"
               random-color
+              networked-audio-source
             ></a-sphere>
           </a-entity>
         </template>
@@ -242,6 +243,8 @@
       // Called by Networked-Aframe when connected to server
       function onConnect() {
         console.log("onConnect", new Date());
+
+        NAF.connection.adapter.enableMicrophone(true);
 
         // Handle camera button click (Off and On)
         // cameraBtnEle.addEventListener("click", function () {
