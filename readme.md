@@ -2,6 +2,8 @@
 
 ### I setup a server hosted on the east coast on Amazon AWS (t3.micro) here: [mit.kenchitaru.studio](https://mit.kenchitaru.studio/)
 
+Client URL: [vr-client](https://mit.kenchitaru.studio/fixed-stream-client.html)
+
 ### The server checks this github repository for changes every 1 minute and automatically pulls said changes.
 
 ### Message me on discord to get access to the repo!
