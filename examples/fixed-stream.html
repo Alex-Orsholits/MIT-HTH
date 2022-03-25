@@ -194,7 +194,7 @@
 
     <script>
       // Camera status
-      let cameraEnabled = false;
+      let cameraEnabled = true;
       // Camera button element
       const cameraBtnEle = document.getElementById("camera-btn");
 
@@ -223,6 +223,7 @@
 
         // Handle camera button click (Off and On)
         cameraBtnEle.addEventListener("click", function () {
+          NAF.connection.adapter.enableMicrophone(!cameraEnabled);
           NAF.connection.adapter.enableCamera(!cameraEnabled);
           cameraEnabled = !cameraEnabled;
           cameraBtnEle.textContent = cameraEnabled
