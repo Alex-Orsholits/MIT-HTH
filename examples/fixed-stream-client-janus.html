@@ -308,7 +308,7 @@
       }
 
       ///////////////////// /////////////////threejs area
-      update: function setbustrotation() {
+      function setbustrotation() {
         let bust = document.querySelector("#bust");
         let player = document.querySelector("#player");
         console.log(bust.components);
@@ -319,7 +319,12 @@
     </script>
 
     <div class="actions">
-      <button id="mic-btn" type="button" class="button">
+      <button
+        id="mic-btn"
+        type="button"
+        class="button"
+        onclick="setbustrotation()"
+      >
         Enable Microphone
       </button>
     </div>
