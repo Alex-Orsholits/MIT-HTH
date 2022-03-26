@@ -58,4 +58,36 @@ More information on the certbot process can be found [here](https://www.nginx.co
 
 You can now access the default networked-aframe examples (under the examples folder), as well as our examples ``fixed-stream-client.html`` and ``fixed-stream.html``.
 
-## Setting up Janus
+## Setting up Janus and the Janus A-frame adapter
+
+We followed this guide to build Janus, with small modifications for an Ubuntu deployment:
+
+https://github.com/networked-aframe/naf-janus-adapter/blob/master/docs/janus-deployment.md
+
+The required change for Ubuntu/Debian deployment is to modify the configure commands so
+that libraries are installed to `/usr/lib/x86_64-linux-gnu/` instead of `/usr/lib` by adding
+`--libdir` to each command.
+
+The packages that need changes are libsrtp and usrsctp:
+
+```
+cd /tmp
+SRTP="2.3.0" && wget https://github.com/cisco/libsrtp/archive/v$SRTP.tar.gz && \
+tar xfv v$SRTP.tar.gz && \
+cd libsrtp-$SRTP && \
+./configure --prefix=/usr --libdir=/usr/lib/x86_64-linux-gnu/ --enable-openssl && \
+make shared_library && sudo make install
+
+cd /tmp
+# datachannel build
+# Jan 13, 2021 0.9.5.0 07f871bda23943c43c9e74cc54f25130459de830
+git clone https://github.com/sctplab/usrsctp.git && \
+cd usrsctp && \
+git checkout 0.9.5.0 && \
+./bootstrap && \
+./configure --prefix=/usr --libdir=/usr/lib/x86_64-linux-gnu/ --disable-programs --disable-inet --disable-inet6 && \
+make && sudo make install
+```
+
+In addition, the libwebsockets build needs fixing, but because it uses cmake adding `--libdir` doesn't work. For now, the solution is to copy the library from /usr/lib to /usr/lib/x86_64-linux-gnu after it is installed.
+
