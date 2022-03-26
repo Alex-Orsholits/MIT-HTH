@@ -314,8 +314,8 @@
         // console.log(bust.components);
         console.log(bust.getAttribute("rotation"));
         console.log(player.getAttribute("rotation"));
-        let playerX = player.object3D.rotation.Y;
-        bust.object3D.rotation.set(0, playerX, 0);
+        let playerY = player.getAttribute("rotation").Y;
+        bust.setAttribute("rotation", { x: 0, y: playerY, z: 0 });
       }
     </script>
 
