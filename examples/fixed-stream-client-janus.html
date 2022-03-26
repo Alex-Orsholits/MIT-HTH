@@ -311,8 +311,9 @@
       function setbustrotation() {
         let bust = document.querySelector("#bust");
         let player = document.querySelector("#player");
-        console.log(bust.components);
+        // console.log(bust.components);
         console.log(bust.getAttribute("rotation"));
+        console.log(player.getAttribute("rotation"));
         let playerX = player.object3D.rotation.Y;
         bust.object3D.rotation.set(0, playerX, 0);
       }
