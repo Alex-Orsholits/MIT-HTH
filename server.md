@@ -22,6 +22,8 @@ We also recommend updating the server deployment with
  - npm (also installs nodejs) ``sudo apt install npm``
  - pm2 (``npm install pm2 -g``)
  - NGINX (``sudo apt install nginx``)
+ - certbot (``sudo apt install certbot``)
+ - python3-certbot-nginx (``sudo apt install python3-certbot-nginx``)
 
 cd to the server directory and run 
 
@@ -44,6 +46,16 @@ and appending
 ``* * * * * /bin/bash /home/ubuntu/TEAM-56/autopull.sh`` to the bottom of the file (this will check for code changes every minute)
 
 ### Configuring NGINX
+We have provided an example nginx config under [nginx-minimal.conf](nginx-minimal.conf).
 
+Simply add the domain name you have routed to your server (this is not covered by our guide, please route one using your own provider).
+
+Once you have added the domain name and corresponding subdomains, run
+
+``sudo certbot --nginx -d mit.<YOUR DOMAIN> -d janus.<YOUR DOMAIN>``
+
+More information on the certbot process can be found [here](https://www.nginx.com/blog/using-free-ssltls-certificates-from-lets-encrypt-with-nginx/#:~:text=Set%20Up%20NGINX,re%20requesting%20a%20certificate%20for.)
+
+You can now access the default networked-aframe examples (under the examples folder), as well as our examples ``fixed-stream-client.html`` and ``fixed-stream.html``
 
 ## Setting up Janus
