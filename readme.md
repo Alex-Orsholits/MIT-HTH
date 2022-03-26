@@ -7,6 +7,6 @@ You can join our space either as a client or as a streamer with the following li
 Client URL: [vr-client](https://mit.kenchitaru.studio/fixed-stream-client-janus.html)
 Streamer URL: [streamer](https://mit.kenchitaru.studio/fixed-stream-janus.html)
 
-### For more information on setting up the server, see server.md
+### For more information on setting up the server, see [server.md](server.md)
 
 ### Message any of the collaborators to get access to the repo!
