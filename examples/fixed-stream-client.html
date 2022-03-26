@@ -119,24 +119,24 @@
         <!-- Templates -->
 
         <!-- Avatar -->
+
+        <a-asset-item
+          id="screenframe"
+          src="./assets/screenframe.glb"
+        ></a-asset-item>
+
         <template id="avatar-template">
           <a-entity class="avatar">
             <a-plane
               color="#FFF"
-              width="16"
-              height="9"
-              position="0 3 0"
+              width="7.84"
+              height="4.41"
+              position="0 2.45357 0"
               material="side: back"
               networked-video-source
               networked-audio-source
             ></a-plane>
-            <a-plane
-              color="#000"
-              width="16"
-              height="9"
-              position="0 3 -0.1"
-              material="side: both"
-            ></a-plane>
+            <a-gltf-model class="screen" src="#screenframe"></a-gltf-model>
           </a-entity>
         </template>
 
@@ -272,7 +272,7 @@
 
       NAF.schemas.add({
         template: "#bust-template",
-        components: ["position", "rotation Z"],
+        components: ["position", "rotation"],
       });
 
       // Called by Networked-Aframe when connected to server
