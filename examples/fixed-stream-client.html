@@ -151,17 +151,20 @@
 
         <template id="player-template">
           <a-entity class="nonstreaming">
-            <!-- <a-sphere
-              class="head"
-              visible="true"
-              radius="0.5"
-              random-color
-              networked-audio-source
-            ></a-sphere> -->
             <a-gltf-model
               class="head"
               src="#playermodel"
               networked-audio-source
+              random-color
+            ></a-gltf-model>
+          </a-entity>
+        </template>
+
+        <template id="bust-template">
+          <a-entity class="bustmodel">
+            <a-gltf-model
+              class="bust"
+              src="#playerbust"
               random-color
             ></a-gltf-model>
           </a-entity>
@@ -216,14 +219,16 @@
           camera
           position="0 1.6 0"
           look-controls="pointerLockEnabled: true;"
-          visible="true"
+          visible="false"
         >
-          <!-- <a-sphere class="head" visible="true" random-color></a-sphere> -->
-          <a-gltf-model
-            class="bust"
-            src="#playerbust"
-            random-color
-          ></a-gltf-model>
+        </a-entity>
+
+        <a-entity
+          id="bust"
+          networked="template:#bust-template;"
+          position="0 1.6 0"
+          visible="false"
+        >
         </a-entity>
       </a-entity>
 
@@ -263,6 +268,11 @@
       NAF.schemas.add({
         template: "#player-template",
         components: ["position", "rotation"],
+      });
+
+      NAF.schemas.add({
+        template: "#bust-template",
+        components: ["position"],
       });
 
       // Called by Networked-Aframe when connected to server
