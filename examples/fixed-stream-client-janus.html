@@ -209,7 +209,6 @@
             position="0 0 0"
             visible="false"
             name="bust"
-            setbustrotation
           >
           </a-entity>
         </a-entity>
@@ -309,7 +308,7 @@
       }
 
       ///////////////////// /////////////////threejs area
-      function setbustrotation() {
+      update: function setbustrotation() {
         let bust = document.querySelector("#bust");
         let player = document.querySelector("#player");
         console.log(bust.components);
