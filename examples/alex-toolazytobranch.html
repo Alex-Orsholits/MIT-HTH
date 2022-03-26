@@ -15,6 +15,7 @@
     <script src="/js/spawn-in-circle.component.js"></script>
 
     <script>
+      let colorfix = 0;
       AFRAME.registerComponent("tracked-vr-hands", {
         onEnterVR() {
           if (AFRAME.utils.device.isMobile()) return; // exclude e.g. cardboard, which lacks tracked controllers
@@ -90,24 +91,26 @@
 
       AFRAME.registerComponent("fixedrandomcolor", {
         init: function () {},
-        update: function () {
-          let spawncolor = new THREE.Color(
-            Math.random(),
-            Math.random(),
-            Math.random()
-          );
-          // console.log(this);
-          // console.log();
-          const mesh = this.el.object3D;
-          // console.log(mesh);
-          mesh.traverse(function (node) {
-            if (node.material) {
-              node.material.color = spawncolor;
-            }
-          });
-          console.log(mesh);
+        update: function () {},
+        tick: function () {
+          if (colorfix == 1) {
+            let spawncolor = new THREE.Color(
+              Math.random(),
+              Math.random(),
+              Math.random()
+            );
+            // console.log(this);
+            // console.log();
+            const mesh = this.el.object3D;
+            // console.log(mesh);
+            mesh.traverse(function (node) {
+              if (node.material) {
+                node.material.color = spawncolor;
+              }
+            });
+            colorfix = 0;
+          }
         },
-        tick: function () {},
       });
 
       // Camera status
@@ -365,6 +368,7 @@
 
       function onConnect() {
         console.log("onConnect", new Date());
+        colorfix = 1;
       }
 
       ///////////////////// /////////////////threejs area
