@@ -229,27 +229,18 @@
 
       <a-entity
         id="camera-rig"
-        tracked-vr-hands
-        movement-controls
-        spawn-in-circle="radius:3"
-        networked="template:#camera-rig-template;"
+        camera
+        position="0 1.6 0"
+        wasd-controls
+        look-controls
       >
         <a-entity
           id="player"
-          networked="template:#player-template;"
-          camera
-          position="0 1.6 0"
-          look-controls="pointerLockEnabled: false;"
-          visible="false"
-          bustmovement
+          networked="template:#avatar-template;attachTemplateToLocal:false;"
+          position="0 0 0"
+          wasd-controls
+          look-controls
         >
-          <!-- <a-entity
-            id="bust"
-            networked="template:#bust-template;"
-            position="0 0 0"
-            visible="false"
-          >
-          </a-entity> -->
         </a-entity>
       </a-entity>
 
