@@ -1,9 +1,12 @@
-# Quick and dirty a-frame setup
+# Hack the Hack - Mirror Portals
 
-### I setup a server hosted on the east coast on Amazon AWS (t3.micro) here: [mit.kenchitaru.studio](https://mit.kenchitaru.studio/)
+### The project is setup a server hosted on the east coast on Amazon AWS (t3.micro) here: [mit.kenchitaru.studio](https://mit.kenchitaru.studio/)
 
-Client URL: [vr-client](https://mit.kenchitaru.studio/fixed-stream-client.html)
+You can join our space either as a client or as a streamer with the following links:
 
-### The server checks this github repository for changes every 1 minute and automatically pulls said changes.
+Client URL: [vr-client](https://mit.kenchitaru.studio/fixed-stream-client-janus.html)
+Streamer URL: [streamer](https://mit.kenchitaru.studio/fixed-stream-janus.html)
 
-### Message me on discord to get access to the repo!
+### For more information on setting up the server, see server.md
+
+### Message any of the collaborators to get access to the repo!
