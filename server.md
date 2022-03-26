@@ -8,3 +8,27 @@ The ports need to be allowed for ingress:
  - TCP port 80
  - TCP port 443
  - UDP ports 51610-65535
+
+## Getting started
+Once you are connected to your new AWS instance via SSH, clone this repository to the home directory
+
+`` git clone https://github.com/Reality-Hack-2022/TEAM-56.git ``
+
+We also recommend updating the server deployment with
+
+``sudo apt update && sudo apt upgrade``
+
+### Required dependencies for bare minimum setup
+ - npm (also installs nodejs) ``sudo apt install npm``
+ - pm2 (``npm install pm2 -g``)
+
+cd to the server directory and run 
+
+``pm2 start easyrtc-server.js``
+
+then run 
+
+``pm2 startup`` and finally ``pm2 save``
+
+pm2 helps us manage the server application and ensures it restarts with the deployment. 
+More info on pm2 can be found [here](https://pm2.keymetrics.io/docs/usage/quick-start/)
