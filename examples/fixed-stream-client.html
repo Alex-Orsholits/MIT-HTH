@@ -10,6 +10,7 @@
     <script src="/dist/networked-aframe.js"></script>
 
     <script src="https://unpkg.com/aframe-randomizer-components@^3.0.1/dist/aframe-randomizer-components.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
 
     <!-- <script>
       // Note the way we're establishing the NAF schema here; this is a bit awkward
@@ -189,11 +190,9 @@
       <a-entity
         id="camera-rig"
         tracked-vr-hands
-        movement-controls="fly:true;"
+        movement-controls
         spawn-in-circle="radius:3"
-        tracked-controls="controller: 0; idPrefix: OpenVR"
         networked="template:#camera-rig-template;"
-        wasd-controls
       >
         <a-entity
           id="player"
