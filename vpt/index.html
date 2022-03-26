@@ -247,8 +247,8 @@
 					"y" : 639.294
 				},
 				"depthImageSize" : {
-					"x" : 640,
-					"y" : 480
+					"x" : 1280,
+					"y" : 720
 				},
 				"depthPrincipalPoint" : {
 					"x" : 331.706,
@@ -263,7 +263,7 @@
 			params.thresholdMax = max;
 
 			vptstream.load( params );
-
+			vptstream.scale.set( 16/9.0, 1.0, 1.0);
 		}
 
 		function toggle( )
