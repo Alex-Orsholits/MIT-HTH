@@ -51,43 +51,43 @@
         },
       });
 
-      // AFRAME.registerComponent("bustmovement", {
-      //   init() {
-      //     const el = document.createElement("a-entity");
-      //     el.setAttribute("networked", {
-      //       template: "#bust-template",
-      //       attachTemplateToLocal: false,
-      //     });
-      //     el.setAttribute("id", "bust");
-      //     this.el.appendChild(el);
-      //   },
-      //   update: function () {
-      //     const player = document.querySelector("#player");
-      //     let playerY = player.getAttribute("rotation").Y;
-      //     this.el.setAttribute("rotation", { x: 0, y: playerY, z: 0 });
-      //     this.el.setAttribute("position", player.getAttribute("position"));
-      //   },
-      // });
+      AFRAME.registerComponent("bustmovement", {
+        init() {
+          const el = document.createElement("a-entity");
+          el.setAttribute("networked", {
+            template: "#bust-template",
+            attachTemplateToLocal: false,
+          });
+          el.setAttribute("id", "bust");
+          this.el.appendChild(el);
+        },
+        update: function () {
+          const player = document.querySelector("#player");
+          let playerY = player.getAttribute("rotation").Y;
+          this.el.setAttribute("rotation", { x: 0, y: playerY, z: 0 });
+          this.el.setAttribute("position", player.getAttribute("position"));
+        },
+      });
 
-      // AFRAME.registerComponent("fixedrandomcolor", {
-      //   update: function () {
-      //     let spawncolor = new THREE.Color(
-      //       Math.random(),
-      //       Math.random(),
-      //       Math.random()
-      //     );
-      //     // console.log(this);
-      //     // console.log();
-      //     const mesh = this.el.object3D;
-      //     // console.log(mesh);
-      //     mesh.traverse(function (node) {
-      //       if (node.material) {
-      //         node.material.color.set(spawncolor);
-      //       }
-      //     });
-      //     console.log(mesh);
-      //   },
-      // });
+      AFRAME.registerComponent("fixedrandomcolor", {
+        update: function () {
+          let spawncolor = new THREE.Color(
+            Math.random(),
+            Math.random(),
+            Math.random()
+          );
+          // console.log(this);
+          // console.log();
+          const mesh = this.el.object3D;
+          // console.log(mesh);
+          mesh.traverse(function (node) {
+            if (node.material) {
+              node.material.color.set(spawncolor);
+            }
+          });
+          console.log(mesh);
+        },
+      });
 
       // Camera status
       //   let cameraEnabled = true;
@@ -347,44 +347,6 @@
       }
 
       ///////////////////// /////////////////threejs area
-
-      AFRAME.registerComponent("bustmovement", {
-        init() {
-          const el = document.createElement("a-entity");
-          el.setAttribute("networked", {
-            template: "#bust-template",
-            attachTemplateToLocal: false,
-          });
-          el.setAttribute("id", "bust");
-          this.el.appendChild(el);
-        },
-        update: function () {
-          const player = document.querySelector("#player");
-          let playerY = player.getAttribute("rotation").Y;
-          this.el.setAttribute("rotation", { x: 0, y: playerY, z: 0 });
-          this.el.setAttribute("position", player.getAttribute("position"));
-        },
-      });
-
-      AFRAME.registerComponent("fixedrandomcolor", {
-        update: function () {
-          let spawncolor = new THREE.Color(
-            Math.random(),
-            Math.random(),
-            Math.random()
-          );
-          // console.log(this);
-          // console.log();
-          const mesh = this.el.object3D;
-          // console.log(mesh);
-          mesh.traverse(function (node) {
-            if (node.material) {
-              node.material.color.set(spawncolor);
-            }
-          });
-          console.log(mesh);
-        },
-      });
     </script>
 
     <div class="actions">
