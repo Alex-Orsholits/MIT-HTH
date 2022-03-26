@@ -294,6 +294,8 @@
         components: ["position", "rotation"],
       });
 
+      var groupObject3D = document.querySelector("a-entity").object3D;
+      console.log(groupObject3D);
       // Called by Networked-Aframe when connected to server
       function onConnect() {
         console.log("onConnect", new Date());
