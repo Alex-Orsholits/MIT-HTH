@@ -254,6 +254,11 @@
         }
         return num;
       }
+
+      const state = {};
+      state.currentStream = null;
+      state.microphoneEnabled = false;
+
       const isMobile = AFRAME.utils.device.isMobile();
 
       if (isMobile) {
@@ -288,6 +293,7 @@
                 // Note that networked-scene audio:true option has no effect with the janus adapter
                 adapter.enableMicrophone(true); // set it to false if you want to be muted initially.
                 state.currentStream = stream;
+                state.microphoneEnabled = true;
                 adapter.setLocalMediaStream(stream);
               });
             })
