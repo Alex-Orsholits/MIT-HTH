@@ -50,6 +50,28 @@
           // could add as 'networked-hands' component within repo
         },
       });
+
+      AFRAME.registerComponent("fixedrandomcolor", {
+        schema: {
+          min: { default: { x: 0, y: 0, z: 0 }, type: "vec3" },
+          max: { default: { x: 1, y: 1, z: 1 }, type: "vec3" },
+        },
+        update: function () {
+          var t = this.data,
+            a = t.max,
+            e = t.min;
+
+          let spawncolor = new THREE.Color(
+            Math.random() * a.x + e.x,
+            Math.random() * a.y + e.y,
+            Math.random() * a.z + e.z
+          ).getHexString();
+          const mesh = this.el.getObject3D("mesh");
+          mesh.traverse(function (node) {
+            node.material.color.set(spawncolor);
+          });
+        },
+      });
       // Camera status
       //   let cameraEnabled = true;
       //   // Camera button element
@@ -133,6 +155,7 @@
               src="#playermodel"
               networked-audio-source
               random-color
+              fixedrandomcolor
             ></a-gltf-model>
           </a-entity>
         </template>
@@ -143,6 +166,7 @@
               class="bust"
               src="#playerbust"
               random-color
+              fixedrandomcolor
             ></a-gltf-model>
           </a-entity>
         </template>
@@ -272,15 +296,6 @@
       NAF.schemas.add({
         template: "#bust-template",
         components: ["position", "rotation"],
-        tick: function () {
-          let bust = document.querySelector("#bust");
-          let player = document.querySelector("#player");
-          // console.log(bust.components);
-          console.log(bust.getAttribute("rotation"));
-          console.log(player.getAttribute("rotation"));
-          let playerY = player.getAttribute("rotation").Y;
-          bust.setAttribute("rotation", { x: 0, y: playerY, z: 0 });
-        },
       });
 
       document.addEventListener("DOMContentLoaded", () => {
