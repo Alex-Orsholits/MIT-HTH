@@ -262,12 +262,12 @@
           look-controls="pointerLockEnabled: false;"
           visible="false"
         >
-          <a-entity id="bust" position="0 0 0" visible="false" bustmovement>
-            <a-gltf-model
-              class="bust"
-              src="#playerbust"
-              fixedrandomcolor
-            ></a-gltf-model>
+          <a-entity
+            id="bust"
+            position="0 0 0"
+            visible="false"
+            networked="template:#bust-template"
+          >
           </a-entity>
         </a-entity>
       </a-entity>
@@ -376,13 +376,7 @@
     </script>
 
     <div class="actions">
-      <button
-        id="mic-btn"
-        type="button"
-        class="button"
-      >
-        Unmute Mic
-      </button>
+      <button id="mic-btn" type="button" class="button">Unmute Mic</button>
     </div>
   </body>
 </html>
