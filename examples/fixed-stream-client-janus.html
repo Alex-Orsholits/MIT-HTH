@@ -65,12 +65,13 @@
           // console.log(this);
           // console.log();
           const mesh = this.el.object3D;
-
+          console.log(mesh);
           mesh.traverse(function (node) {
             if (node.material) {
               node.material.color.set(spawncolor);
             }
           });
+          console.log(mesh);
         },
       });
       // Camera status
