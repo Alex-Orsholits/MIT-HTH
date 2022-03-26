@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Multi Streams Example — Networked-Aframe</title>
+    <title>MIT HTH MIRROR Client</title>
     <meta name="description" content="Dev Example — Networked-Aframe" />
 
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
@@ -66,6 +66,23 @@
           let playerY = player.getAttribute("rotation").Y;
           this.el.setAttribute("rotation", { x: 0, y: playerY, z: 0 });
           this.el.setAttribute("position", player.getAttribute("position"));
+        },
+      });
+
+      AFRAME.registerComponent("look-at-y", {
+        schema: {
+          target: { type: "string", default: "camera" },
+        },
+        init: function () {},
+        update: function () {},
+        tick: function () {
+          const targetEl = document.getElementById(this.data.target).object3D;
+          const el = this.el.object3D;
+          const vec = new THREE.Vector3();
+          targetEl.getWorldDirection(vec);
+          vec.y = 0;
+          vec.add(el.position);
+          el.lookAt(vec);
         },
       });
 
@@ -242,15 +259,15 @@
           position="0 1.6 0"
           look-controls="pointerLockEnabled: false;"
           visible="false"
-          bustmovement
         >
-          <!-- <a-entity
+          <a-entity
             id="bust"
             networked="template:#bust-template;"
             position="0 0 0"
             visible="false"
+            look-at-y
           >
-          </a-entity> -->
+          </a-entity>
         </a-entity>
       </a-entity>
 
