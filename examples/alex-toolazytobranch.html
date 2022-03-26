@@ -91,7 +91,7 @@
 
       AFRAME.registerComponent("fixedrandomcolor", {
         init: function () {},
-        update: function (colorfix = 0) {},
+        update: function () {},
         tick: function () {
           if (colorfix == 1) {
             let spawncolor = new THREE.Color(
@@ -268,11 +268,7 @@
           visible="false"
         >
           <a-entity id="bust" position="0 0 0" visible="false" bustmovement>
-            <a-gltf-model
-              class="bust"
-              src="#playerbust"
-              fixedrandomcolor
-            ></a-gltf-model>
+            <a-gltf-model class="bust" src="#playerbust"></a-gltf-model>
           </a-entity>
         </a-entity>
       </a-entity>
@@ -364,6 +360,7 @@
               );
             });
         });
+        colorfix = 0;
       });
 
       function onConnect() {
