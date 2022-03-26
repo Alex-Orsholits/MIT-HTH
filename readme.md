@@ -10,3 +10,5 @@ Streamer URL: [streamer](https://mit.kenchitaru.studio/fixed-stream-janus.html)
 ### For more information on setting up the server, see [server.md](server.md)
 
 ### Message any of the collaborators to get access to the repo!
+
+Licencing information [here](licences.md)
