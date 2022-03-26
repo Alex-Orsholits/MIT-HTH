@@ -63,6 +63,7 @@
             Math.random()
           ).getHexString();
           const mesh = document.querySelector("#player").getObject3D("mesh");
+          console.log(mesh);
           mesh.traverse(function (node) {
             if (node.material) {
               node.material.color.set(spawncolor);
