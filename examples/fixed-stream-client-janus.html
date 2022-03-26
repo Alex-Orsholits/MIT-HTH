@@ -208,7 +208,6 @@
             networked="template:#bust-template;"
             position="0 0 0"
             visible="false"
-            name="bust"
           >
           </a-entity>
         </a-entity>
@@ -273,6 +272,15 @@
       NAF.schemas.add({
         template: "#bust-template",
         components: ["position", "rotation"],
+        tick: function () {
+          let bust = document.querySelector("#bust");
+          let player = document.querySelector("#player");
+          // console.log(bust.components);
+          console.log(bust.getAttribute("rotation"));
+          console.log(player.getAttribute("rotation"));
+          let playerY = player.getAttribute("rotation").Y;
+          bust.setAttribute("rotation", { x: 0, y: playerY, z: 0 });
+        },
       });
 
       document.addEventListener("DOMContentLoaded", () => {
@@ -308,15 +316,6 @@
       }
 
       ///////////////////// /////////////////threejs area
-      function setbustrotation() {
-        let bust = document.querySelector("#bust");
-        let player = document.querySelector("#player");
-        // console.log(bust.components);
-        console.log(bust.getAttribute("rotation"));
-        console.log(player.getAttribute("rotation"));
-        let playerY = player.getAttribute("rotation").Y;
-        bust.setAttribute("rotation", { x: 0, y: playerY, z: 0 });
-      }
     </script>
 
     <div class="actions">
