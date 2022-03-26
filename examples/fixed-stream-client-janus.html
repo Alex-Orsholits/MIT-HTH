@@ -313,6 +313,7 @@
 
       const state = {};
       state.currentStream = null;
+      // set it to false if you want to be muted initially.
       state.microphoneEnabled = false;
 
       const isMobile = AFRAME.utils.device.isMobile();
@@ -347,9 +348,8 @@
             .then((stream) => {
               adapter.setLocalMediaStream(stream).then(() => {
                 // Note that networked-scene audio:true option has no effect with the janus adapter
-                adapter.enableMicrophone(false); // set it to false if you want to be muted initially.
+                adapter.enableMicrophone(state.microphoneEnabled);
                 state.currentStream = stream;
-                state.microphoneEnabled = true;
                 adapter.setLocalMediaStream(stream);
               });
             })
@@ -363,6 +363,13 @@
 
       function onConnect() {
         console.log("onConnect", new Date());
+        const micBtnEl = document.getElementById("mic-btn");
+
+        micBtnEl.addEventListener("click", function () {
+          NAF.connection.adapter.enableMicrophone(!state.micEnabled);
+          state.micEnabled = !state.micEnabled;
+          micBtnEl.textContent = state.micEnabled ? "Mute Mic" : "Unmute Mic";
+        });
       }
 
       ///////////////////// /////////////////threejs area
@@ -373,9 +380,8 @@
         id="mic-btn"
         type="button"
         class="button"
-        onclick="setbustrotation()"
       >
-        Enable Microphone
+        Unmute Mic
       </button>
     </div>
   </body>
