@@ -56,6 +56,6 @@ Once you have added the domain name and corresponding subdomains, run
 
 More information on the certbot process can be found [here](https://www.nginx.com/blog/using-free-ssltls-certificates-from-lets-encrypt-with-nginx/#:~:text=Set%20Up%20NGINX,re%20requesting%20a%20certificate%20for.)
 
-You can now access the default networked-aframe examples (under the examples folder), as well as our examples ``fixed-stream-client.html`` and ``fixed-stream.html``
+You can now access the default networked-aframe examples (under the examples folder), as well as our examples ``fixed-stream-client.html`` and ``fixed-stream.html``.
 
 ## Setting up Janus
