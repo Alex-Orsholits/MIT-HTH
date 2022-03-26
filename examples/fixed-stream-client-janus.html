@@ -62,7 +62,7 @@
             Math.random(),
             Math.random()
           ).getHexString();
-          const mesh = this.el;
+          const mesh = this;
           mesh.traverse(function (node) {
             if (node.material) {
               node.material.color.set(spawncolor);
