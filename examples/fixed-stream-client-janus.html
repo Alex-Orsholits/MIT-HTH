@@ -203,24 +203,24 @@
           look-controls="pointerLockEnabled: true;"
           visible="false"
         >
-        </a-entity>
-
-        <a-entity
-          id="bust"
-          networked="template:#bust-template;"
-          position="0 1.6 0"
-          visible="false"
-        >
+          <a-entity
+            id="bust"
+            networked="template:#bust-template;"
+            position="0 0 0"
+            visible="false"
+            name="bust"
+          >
+          </a-entity>
         </a-entity>
       </a-entity>
 
-      <a-entity
+      <!-- <a-entity
         position="0 0 0"
         geometry="primitive: plane; width: 10000; height: 10000;"
         rotation="-90 0 0"
         material="src: #gridblack; repeat: 20000 20000; transparent: true; metalness:0.0; roughness: 0.4; sphericalEnvMap: #sky;"
         shadow="receive: true"
-      ></a-entity>
+      ></a-entity> -->
 
       <!-- <a-entity
         light="color: #ffffff; intensity: 0.8; type: ambient;"
@@ -289,7 +289,7 @@
             .then((stream) => {
               adapter.setLocalMediaStream(stream).then(() => {
                 // Note that networked-scene audio:true option has no effect with the janus adapter
-                adapter.enableMicrophone(true); // set it to false if you want to be muted initially.
+                adapter.enableMicrophone(false); // set it to false if you want to be muted initially.
                 state.currentStream = stream;
                 state.microphoneEnabled = true;
                 adapter.setLocalMediaStream(stream);
