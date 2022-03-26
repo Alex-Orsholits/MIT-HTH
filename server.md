@@ -21,6 +21,7 @@ We also recommend updating the server deployment with
 ### Required dependencies for bare minimum setup
  - npm (also installs nodejs) ``sudo apt install npm``
  - pm2 (``npm install pm2 -g``)
+ - NGINX (``sudo apt install nginx``)
 
 cd to the server directory and run 
 
@@ -42,4 +43,7 @@ You can also set it up as a cronjob by opening the crontab editor using
 and appending 
 ``* * * * * /bin/bash /home/ubuntu/TEAM-56/autopull.sh`` to the bottom of the file (this will check for code changes every minute)
 
+### Configuring NGINX
 
+
+## Setting up Janus
