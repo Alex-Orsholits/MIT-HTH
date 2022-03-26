@@ -267,8 +267,12 @@
           look-controls="pointerLockEnabled: false;"
           visible="false"
         >
-          <a-entity id="bust" position="0 0 0" visible="false">
-            <a-gltf-model class="bust" src="#playerbust"></a-gltf-model>
+          <a-entity
+            id="bust"
+            position="0 0 0"
+            visible="false"
+            netwroekd="template:#bust-template"
+          >
           </a-entity>
         </a-entity>
       </a-entity>
