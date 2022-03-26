@@ -91,7 +91,7 @@
 
       AFRAME.registerComponent("fixedrandomcolor", {
         init: function () {},
-        update: function () {},
+        update: function (colorfix = 0) {},
         tick: function () {
           if (colorfix == 1) {
             let spawncolor = new THREE.Color(
