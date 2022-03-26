@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /home/ubuntu/MIT-HTH
+cd /home/ubuntu/TEAM-56
 
 git remote update
 
