@@ -234,9 +234,7 @@
       <!-- <a-sky src="#sky" rotation="0 -90 0"></a-sky> -->
       <!-- <a-sky color="#FFF"></a-sky> -->
 
-      <a-entity
-        environment="preset: forest; groundColor: #445; grid: cross"
-      ></a-entity>
+      <a-entity environment="preset: forest; grid: cross"></a-entity>
 
       <a-entity
         id="particles"
@@ -248,7 +246,7 @@
 
     <script>
       function genClientId() {
-        let num = '';
+        let num = "";
         for (let i = 0; i < 16; i++) {
           num += Math.floor(Math.random() * 10).toString();
         }
