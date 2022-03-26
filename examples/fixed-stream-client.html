@@ -140,7 +140,14 @@
           </a-entity>
         </template>
 
-        <a-asset-item id="playermodel" src="./assets/player.glb"></a-asset-item>
+        <a-asset-item
+          id="playermodel"
+          src="./assets/playerhead.glb"
+        ></a-asset-item>
+        <a-asset-item
+          id="playerbust"
+          src="./assets/playerbust.glb"
+        ></a-asset-item>
 
         <template id="player-template">
           <a-entity class="nonstreaming">
@@ -211,7 +218,12 @@
           look-controls="pointerLockEnabled: true;"
           visible="false"
         >
-          <a-sphere class="head" visible="true" random-color></a-sphere>
+          <!-- <a-sphere class="head" visible="true" random-color></a-sphere> -->
+          <a-gltf-model
+            class="bust"
+            src="#playerbust"
+            random-color
+          ></a-gltf-model>
         </a-entity>
       </a-entity>
 
