@@ -51,6 +51,24 @@
         },
       });
 
+      AFRAME.registerComponent("bustmovement", {
+        init() {
+          const el = document.createElement("a-entity");
+          el.setAttribute("networked", {
+            template: "#bust-template",
+            attachTemplateToLocal: false,
+          });
+          el.setAttribute("id", "bust");
+          this.el.appendChild(el);
+        },
+        update: function () {
+          const player = document.querySelector("#player");
+          let playerY = player.getAttribute("rotation").Y;
+          this.el.setAttribute("rotation", { x: 0, y: playerY, z: 0 });
+          this.el.setAttribute("position", player.getAttribute("position"));
+        },
+      });
+
       AFRAME.registerComponent("fixedrandomcolor", {
         // schema: {
         //   min: { default: { x: 0, y: 0, z: 0 }, type: "vec3" },
@@ -74,6 +92,7 @@
           console.log(mesh);
         },
       });
+
       // Camera status
       //   let cameraEnabled = true;
       //   // Camera button element
@@ -226,14 +245,15 @@
           position="0 1.6 0"
           look-controls="pointerLockEnabled: false;"
           visible="false"
+          bustmovement
         >
-          <a-entity
+          <!-- <a-entity
             id="bust"
             networked="template:#bust-template;"
             position="0 0 0"
             visible="false"
           >
-          </a-entity>
+          </a-entity> -->
         </a-entity>
       </a-entity>
 
