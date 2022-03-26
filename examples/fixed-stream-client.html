@@ -207,6 +207,11 @@
           <a-entity></a-entity>
         </template>
 
+        <a-asset-item
+          id="realityhack"
+          src="./assets/realityhack.glb"
+        ></a-asset-item>
+
         <!-- /Templates -->
       </a-assets>
 
@@ -258,6 +263,8 @@
         id="particles"
         particle-system="preset: snow; color: #000000,#FFFFFF; blending: 1"
       ></a-entity>
+
+      <a-gltf-model class="realityhacked" src="#realityhack"></a-gltf-model>
     </a-scene>
 
     <script>
