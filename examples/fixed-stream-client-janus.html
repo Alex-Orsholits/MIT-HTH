@@ -200,7 +200,7 @@
           networked="template:#player-template;"
           camera
           position="0 1.6 0"
-          look-controls="pointerLockEnabled: true;"
+          look-controls="pointerLockEnabled: false;"
           visible="false"
         >
           <a-entity
@@ -209,6 +209,7 @@
             position="0 0 0"
             visible="false"
             name="bust"
+            setbustrotation
           >
           </a-entity>
         </a-entity>
@@ -307,11 +308,15 @@
         console.log("onConnect", new Date());
       }
 
-      //////////////////////////////////////threejs area
-
-      let bust = document.querySelector("#bust");
-      console.log(bust.components);
-      console.log(bust.getAttribute("rotation"));
+      ///////////////////// /////////////////threejs area
+      function setbustrotation() {
+        let bust = document.querySelector("#bust");
+        let player = document.querySelector("#player");
+        console.log(bust.components);
+        console.log(bust.getAttribute("rotation"));
+        let playerX = player.object3D.rotation.Y;
+        bust.object3D.rotation.set(0, playerX, 0);
+      }
     </script>
 
     <div class="actions">
