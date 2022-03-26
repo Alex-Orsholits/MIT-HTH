@@ -140,15 +140,18 @@
           </a-entity>
         </template>
 
+        <a-asset-item id="playermodel" src="./assets/player.glb"></a-asset-item>
+
         <template id="player-template">
           <a-entity class="nonstreaming">
-            <a-sphere
+            <!-- <a-sphere
               class="head"
               visible="true"
               radius="0.5"
               random-color
               networked-audio-source
-            ></a-sphere>
+            ></a-sphere> -->
+            <a-gltf-model class="head" src="#playermodel"></a-gltf-model>
           </a-entity>
         </template>
 
