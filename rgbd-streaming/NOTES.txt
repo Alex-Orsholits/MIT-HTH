@@ -1,0 +1,38 @@
+This sub-directory contains notes on work toward streaming
+RGB+Depth video textures into the VR world, so they
+can be presented as volumetric captures.
+
+RGBD streams can be generated using a Microsoft Azure Kinect,
+but requires building various pieces of software.
+
+Dependencies
+------------
+
+Microsoft Azure Kinect SDK
+
+ - https://github.com/microsoft/Azure-Kinect-Sensor-SDK/blob/develop/docs/usage.md
+ - See in particular the portion about installing libk4a, or extracting the 
+   libdepthengine.so.2.0
+
+GStreamer and plugins
+
+ - Install the GStreamer core, base, good, bad, ugly and libav plugins
+   plus build headers
+
+Aivero GStreamer RGBD elements from this fork:
+
+ - git clone https://gitlab.com/aivero/open-source/contrib.git
+ - Compile gst-rgbd, gst-rgbd-src and gst-colorizer
+
+ - Either copy the plugin .so files from each of those build dirs
+   to the main GStreamer plugin dir, or set GST_PLUGIN_PATH to point to
+
+Examples
+--------
+
+There are several test scripts in this directory that exercise
+the Kinect capture.
+
+Output from the kinect-to-hls.sh script can be copied to
+the server into the hls-video/ subdir on the server for
+use with the vpt/ sample
