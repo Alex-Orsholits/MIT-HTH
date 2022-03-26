@@ -32,3 +32,14 @@ then run
 
 pm2 helps us manage the server application and ensures it restarts with the deployment. 
 More info on pm2 can be found [here](https://pm2.keymetrics.io/docs/usage/quick-start/)
+
+If you have access to this Github repository, or a fork, you can use the ``autopull.sh`` script to pull the latest code and restart the nodejs server. 
+
+You can also set it up as a cronjob by opening the crontab editor using 
+
+``contrab -e``
+
+and appending 
+``* * * * * /bin/bash /home/ubuntu/TEAM-56/autopull.sh`` to the bottom of the file (this will check for code changes every minute)
+
+
