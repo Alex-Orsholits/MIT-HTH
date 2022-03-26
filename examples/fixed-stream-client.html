@@ -99,7 +99,7 @@
       room: basic-multi-stream;
       debug: true;
       adapter: easyrtc;
-      audio: true;
+      audio: false;
       video: false;
     "
     >
@@ -283,7 +283,7 @@
       function onConnect() {
         console.log("onConnect", new Date());
 
-        NAF.connection.adapter.enableMicrophone(true);
+        // NAF.connection.adapter.enableMicrophone(true);
 
         // Handle camera button click (Off and On)
         // cameraBtnEle.addEventListener("click", function () {
