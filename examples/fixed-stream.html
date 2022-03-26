@@ -131,7 +131,13 @@
         <!-- /Templates -->
       </a-assets>
 
-      <a-entity id="camera-rig" camera position="0 1.6 0">
+      <a-entity
+        id="camera-rig"
+        camera
+        position="0 1.6 0"
+        wasd-controls
+        look-controls
+      >
         <a-entity
           id="player"
           networked="template:#avatar-template;attachTemplateToLocal:false;"
