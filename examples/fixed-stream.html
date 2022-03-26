@@ -127,17 +127,23 @@
         <template id="camera-rig-template">
           <a-entity></a-entity>
         </template>
+
         <!-- /Templates -->
       </a-assets>
 
       <a-entity
-        id="player"
-        networked="template:#avatar-template;attachTemplateToLocal:false;"
-        position="0 0 0"
+        id="camera-rig"
         camera
         wasd-controls
         look-controls
+        position="0 1.6 0"
       >
+        <a-entity
+          id="player"
+          networked="template:#avatar-template;attachTemplateToLocal:false;"
+          position="0 0 0"
+        >
+        </a-entity>
       </a-entity>
 
       <a-entity
