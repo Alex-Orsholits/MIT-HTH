@@ -52,11 +52,11 @@
       });
 
       AFRAME.registerComponent("fixedrandomcolor", {
-        schema: {
-          min: { default: { x: 0, y: 0, z: 0 }, type: "vec3" },
-          max: { default: { x: 1, y: 1, z: 1 }, type: "vec3" },
-        },
-        update: function () {
+        // schema: {
+        //   min: { default: { x: 0, y: 0, z: 0 }, type: "vec3" },
+        //   max: { default: { x: 1, y: 1, z: 1 }, type: "vec3" },
+        // },
+        init: function () {
           let spawncolor = new THREE.Color(
             Math.random(),
             Math.random(),
@@ -156,7 +156,6 @@
               class="head"
               src="#playermodel"
               networked-audio-source
-              random-color
               fixedrandomcolor
             ></a-gltf-model>
           </a-entity>
@@ -167,7 +166,6 @@
             <a-gltf-model
               class="bust"
               src="#playerbust"
-              random-color
               fixedrandomcolor
             ></a-gltf-model>
           </a-entity>
