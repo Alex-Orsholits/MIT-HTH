@@ -61,10 +61,12 @@
           el.setAttribute("id", "bust");
           this.el.appendChild(el);
         },
-        update: function () {
+        tick: function () {
           const player = document.querySelector("#player");
           let playerY = player.getAttribute("rotation").Y;
+          // console.log("rotation", { x: 0, y: playerY, z: 0 });
           this.el.setAttribute("rotation", { x: 0, y: playerY, z: 0 });
+          // console.log("position", player.getAttribute("position"));
           this.el.setAttribute("position", player.getAttribute("position"));
         },
       });
@@ -260,13 +262,12 @@
           look-controls="pointerLockEnabled: false;"
           visible="false"
         >
-          <a-entity
-            id="bust"
-            networked="template:#bust-template;"
-            position="0 0 0"
-            visible="false"
-            look-at-y
-          >
+          <a-entity id="bust" position="0 0 0" visible="false" bustmovement>
+            <a-gltf-model
+              class="bust"
+              src="#playerbust"
+              fixedrandomcolor
+            ></a-gltf-model>
           </a-entity>
         </a-entity>
       </a-entity>
