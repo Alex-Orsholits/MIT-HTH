@@ -81,9 +81,9 @@
           const mesh = this.el.object3D;
           // console.log(mesh);
           mesh.traverse(function (node) {
-            if (node.material) {
-              node.material.color = spawncolor;
-            }
+            // if (node.material) {
+            node.material.color = spawncolor;
+            // }
           });
           console.log(mesh);
         },
