@@ -56,17 +56,17 @@
         //   min: { default: { x: 0, y: 0, z: 0 }, type: "vec3" },
         //   max: { default: { x: 1, y: 1, z: 1 }, type: "vec3" },
         // },
-        init: function () {
+        update: function () {
           let spawncolor = new THREE.Color(
             Math.random(),
             Math.random(),
             Math.random()
-          ).getHexString();
+          );
           // console.log(this);
           // console.log();
           const mesh = this.el.object3D;
-          console.log(mesh);
-          mesh.traverse(function (node) {
+          // console.log(mesh);
+          mesh.children[0].traverse(function (node) {
             if (node.material) {
               node.material.color.set(spawncolor);
             }
