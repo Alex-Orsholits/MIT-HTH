@@ -62,9 +62,9 @@
             Math.random(),
             Math.random()
           ).getHexString();
-          console.log(this);
-          console.log(this.el.object3D);
-          const mesh = this.getObject3D("mesh");
+          // console.log(this);
+          // console.log();
+          const mesh = this.el.object3D;
 
           mesh.traverse(function (node) {
             if (node.material) {
