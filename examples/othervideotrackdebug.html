@@ -345,12 +345,15 @@
             //     frameRate: 30,
             //   },
             // });
-            state.currentStream.addTrack(
-              navigator.mediaDevices.getDisplayMedia()
-            );
-            await NAF.connection.adapter.setLocalMediaStream(
-              state.currentStream
-            );
+            // state.currentStream.addTrack(
+            //   navigator.mediaDevices.getDisplayMedia()
+            // );
+            // await NAF.connection.adapter.setLocalMediaStream(
+            //   state.currentStream
+            // );
+            navigator.mediaDevices.getDisplayMedia().then((stream) => {
+              NAF.connection.adapter.addLocalMediaStream(stream, "screen");
+            });
           }
 
           state.cameraEnabled = !state.cameraEnabled;
