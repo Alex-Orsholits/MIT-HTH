@@ -13,6 +13,9 @@
     <script src="/dist/naf-janus-adapter.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/IdeaSpaceVR/aframe-particle-system-component@master/dist/aframe-particle-system-component.min.js"></script>
     <script src="/js/spawn-in-circle.component.js"></script>
+    <script src="/js/vptstream.js"></script>
+    <script src="/js/networked-video-rgbd-source.js"></script>
+    <script src="/js/a-vptstream.js"></script>
 
     <script>
       AFRAME.registerComponent("tracked-vr-hands", {
@@ -175,6 +178,16 @@
               position="0 2.45357 0"
             ></a-gltf-model>
           </a-entity>
+        </template>
+
+        <template id="avatar-template-rgbd">
+          <a-entity class="avatar-rgbd"
+              position="10.0 2.45357 0"
+              width="7.84"
+              height="4.41"
+              vptstream
+              networked-video-rgbd-source
+          ></a-entity>
         </template>
 
         <a-asset-item
