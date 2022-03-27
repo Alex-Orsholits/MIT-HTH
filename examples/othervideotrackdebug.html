@@ -337,15 +337,17 @@
           if (state.cameraEnabled) {
             await stopAndRemoveVideoTrack();
           } else {
-            const stream = await navigator.mediaDevices.getUserMedia({
-              video: {
-                mediaSource: "screen",
-                width: { max: 1920, ideal: 1280 },
-                height: { max: 1080, ideal: 720 },
-                frameRate: 30,
-              },
-            });
-            state.currentStream.addTrack(stream.getVideoTracks()[0]);
+            // const stream = await navigator.mediaDevices.getUserMedia({
+            //   video: {
+            //     mediaSource: "camera",
+            //     width: { max: 1920, ideal: 1280 },
+            //     height: { max: 1080, ideal: 720 },
+            //     frameRate: 30,
+            //   },
+            // });
+            state.currentStream.addTrack(
+              navigator.mediaDevices.getDisplayMedia()
+            );
             await NAF.connection.adapter.setLocalMediaStream(
               state.currentStream
             );
