@@ -369,7 +369,7 @@
             await stopAndRemoveVideoTrack();
           } else {
             const stream = scene.canvas.captureStream(30);
-            state.currentStream.addTrack(stream.getVideoTracks()[1]);
+            state.currentStream.addTrack(stream.getVideoTracks()[3]);
             await NAF.connection.adapter.setLocalMediaStream(
               state.currentStream
             );
