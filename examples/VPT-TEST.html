@@ -13,14 +13,9 @@
     <script src="/dist/naf-janus-adapter.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/IdeaSpaceVR/aframe-particle-system-component@master/dist/aframe-particle-system-component.min.js"></script>
     <script src="/js/spawn-in-circle.component.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script src="/vpt/vptstream.js"></script>
+    <script src="/js/vptstream-aframe.js"></script>
 
     <script>
-      if (Hls.isSupported()) {
-        var hlstmp = new Hls();
-      }
-
       AFRAME.registerComponent("tracked-vr-hands", {
         onEnterVR() {
           if (AFRAME.utils.device.isMobile()) return; // exclude e.g. cardboard, which lacks tracked controllers
@@ -112,70 +107,6 @@
           });
           console.log(mesh);
         },
-      });
-
-      AFRAME.registerComponent("VolumetricVideo", {
-        init: function () {
-          const params = {
-            videoPath: "https://mit.kenchitaru.studio/hls/playlist.m3u8",
-            renderMode: "ortho",
-            startat: 0.0,
-            pointSize: 8.0,
-            depthMin: 0.1,
-            depthMax: 4.0,
-            scale: 1.0,
-            textureWidth: 1280,
-            textureHeight: 720,
-            thresholdMinX: -2.0,
-            thresholdMaxX: 2.0,
-            thresholdMinY: -2.0,
-            thresholdMaxY: 2.0,
-            thresholdMinZ: 0.0,
-            thresholdMaxZ: 4.0,
-            render: true,
-            load: function () {
-              load(params);
-            },
-          };
-
-          const thresholdParams = [
-            "thresholdMinX",
-            "thresholdMaxX",
-            "thresholdMinY",
-            "thresholdMaxY",
-            "thresholdMinZ",
-            "thresholdMaxZ",
-          ];
-
-          thresholdParams.forEach((element) => {
-            gui
-              .add(params, element)
-              .min(-4.0)
-              .max(4.0)
-              .step(0.01)
-              .onChange((newValue) => {
-                updateThreshold(element, newValue, params);
-              });
-          });
-          vptstream = new VPTStream();
-          document.body.appendChild(vptstream.video);
-          vptstream.addEventListener(
-            VPTStream.STREAMEVENTS.PLAY_SUCCESS,
-            function (event) {
-              console.log(`${event.type} ${event.message}`);
-            }
-          );
-
-          vptstream.addEventListener(
-            VPTStream.STREAMEVENTS.PLAY_ERROR,
-            function (event) {
-              console.log(`${event.type} ${event.message}`);
-            }
-          );
-          scene.add(vptstream);
-        },
-        update: function () {},
-        tick: function () {},
       });
 
       // Camera status
@@ -371,6 +302,8 @@
       ></a-entity>
 
       <a-gltf-model class="realityhacked" src="#realityhack"></a-gltf-model>
+
+      <a-entity id="volumetricstream" vpt-stream> </a-entity>
     </a-scene>
 
     <script>
