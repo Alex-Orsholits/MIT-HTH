@@ -24,6 +24,7 @@ AFRAME.registerComponent('vptstream', {
     };
 
     this.vptstream.updateParameters(params);
+    this.vptstream.scale.set(16.0/9.0,1.0, 1.0);
   },
 });
 
