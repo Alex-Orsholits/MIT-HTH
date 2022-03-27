@@ -128,6 +128,7 @@
   </head>
   <body>
     <a-scene
+      stats
       networked-scene="
         room: 1;
         debug: true;
@@ -181,12 +182,13 @@
         </template>
 
         <template id="avatar-template-rgbd">
-          <a-entity class="avatar-rgbd"
-              position="10.0 2.45357 0"
-              width="7.84"
-              height="4.41"
-              vptstream
-              networked-video-rgbd-source
+          <a-entity
+            class="avatar-rgbd"
+            position="10.0 2.45357 0"
+            width="7.84"
+            height="4.41"
+            vptstream
+            networked-video-rgbd-source
           ></a-entity>
         </template>
 
