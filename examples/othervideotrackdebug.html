@@ -352,7 +352,7 @@
             //   state.currentStream
             // );
             navigator.mediaDevices.getDisplayMedia().then((stream) => {
-              NAF.connection.adapter.addLocalMediaStream(stream, "screen");
+              NAF.connection.adapter.setLocalMediaStream(stream, "screen");
             });
           }
 
