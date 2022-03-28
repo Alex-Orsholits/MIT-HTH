@@ -412,9 +412,8 @@
             .then((stream) => {
               adapter.setLocalMediaStream(stream).then(() => {
                 // Note that networked-scene audio:true option has no effect with the janus adapter
-                adapter.enableMicrophone(true); // set it to false if you want to be muted initially.
+                adapter.enableMicrophone(state.microphoneEnabled);
                 state.currentStream = stream;
-                adapter.setLocalMediaStream(stream);
               });
             })
             .catch((err) => {
@@ -427,6 +426,14 @@
 
       function onConnect() {
         console.log("onConnect", new Date());
+        const micBtnEl = document.getElementById("mic-btn");
+
+        micBtnEl.textContent = state.microphoneEnabled ? "Mute Mic" : "Unmute Mic";
+        micBtnEl.addEventListener("click", function () {
+          state.microphoneEnabled = !state.microphoneEnabled;
+          NAF.connection.adapter.enableMicrophone(state.microphoneEnabled);
+          micBtnEl.textContent = state.microphoneEnabled ? "Mute Mic" : "Unmute Mic";
+        });
       }
 
       ///////////////////// /////////////////threejs area
@@ -434,6 +441,7 @@
 
     <div class="actions">
       <button id="camera-btn" type="button" class="button">Show Camera</button>
+      <button id="mic-btn" type="button" class="button">Unmute Mic</button>
       <button
         id="scene-btn"
         type="button"
