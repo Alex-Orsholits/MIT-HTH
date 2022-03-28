@@ -365,7 +365,6 @@
                 // Note that networked-scene audio:true option has no effect with the janus adapter
                 adapter.enableMicrophone(state.microphoneEnabled);
                 state.currentStream = stream;
-                adapter.setLocalMediaStream(stream);
               });
             })
             .catch((err) => {
@@ -380,10 +379,11 @@
         console.log("onConnect", new Date());
         const micBtnEl = document.getElementById("mic-btn");
 
+        micBtnEl.textContent = state.microphoneEnabled ? "Mute Mic" : "Unmute Mic";
         micBtnEl.addEventListener("click", function () {
-          NAF.connection.adapter.enableMicrophone(!state.micEnabled);
-          state.micEnabled = !state.micEnabled;
-          micBtnEl.textContent = state.micEnabled ? "Mute Mic" : "Unmute Mic";
+          NAF.connection.adapter.enableMicrophone(!state.microphoneEnabled);
+          state.microphoneEnabled = !state.microphoneEnabled;
+          micBtnEl.textContent = state.microphoneEnabled ? "Mute Mic" : "Unmute Mic";
         });
       }
 
