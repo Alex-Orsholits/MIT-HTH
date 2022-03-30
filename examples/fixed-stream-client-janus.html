@@ -380,6 +380,10 @@
         console.log("onConnect", new Date());
         const micBtnEl = document.getElementById("mic-btn");
 
+        // Sync microphoneEnabled state and button text
+        // now that the publisher exists
+        NAF.connection.adapter.enableMicrophone(state.microphoneEnabled);
+
         micBtnEl.textContent = state.microphoneEnabled ? "Mute Mic" : "Unmute Mic";
         micBtnEl.addEventListener("click", function () {
           NAF.connection.adapter.enableMicrophone(!state.microphoneEnabled);
